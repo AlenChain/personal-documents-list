@@ -1,3 +1,11 @@
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+    --font-color-white: rgb(255, 255, 255);
+    --button-background-red: rgb(255, 78, 78);
+    --button-background-blue: rgb(65, 65, 255);
+    --button-background-orange: rgb(255, 165, 0);
+}

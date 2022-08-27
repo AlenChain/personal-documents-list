@@ -1,1 +1,18 @@
-<p>search-panel works!</p>
+<div class="search-panel-container">
+    <form class="document-controls-container">
+        <mat-form-field class="document-type-control">
+            <mat-label>Вид документа</mat-label>
+            <mat-select [formControl]="documentType">
+                <mat-option *ngFor="let documentType of documentTypes" [value]="documentType">{{documentType | documentName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="document-number-control">
+            <mat-label>Номер</mat-label>
+            <input matInput [formControl]="documentNumber">
+        </mat-form-field>
+    </form>
+    <div class="panel-buttons-container">
+        <button class="panel-button search">НАЙТИ</button>
+        <button class="panel-button clear">ОЧИСТИТЬ</button>
+    </div>
+</div>

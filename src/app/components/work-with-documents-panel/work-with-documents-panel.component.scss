@@ -9,6 +9,7 @@
         .work-with-documents-button {
             border-radius: 6px;
             margin-right: 10px;
+            padding: 0 10px;
             cursor: pointer;
 
             .button-content {
@@ -29,17 +30,17 @@
         }
 
         .work-with-documents-button.add {
-            background-color: orange;
+            background-color: var(--button-background-orange);
         }
 
         .work-with-documents-button.edit {
-            color: white;
-            background-color: rgb(65, 65, 255);
+            color: var(--font-color-white);
+            background-color: var(--button-background-blue);
         }
 
         .work-with-documents-button.delete {
-            color: white;
-            background-color: rgb(255, 78, 78);
+            color: var(--font-color-white);
+            background-color: var(--button-background-red);
         }
     }
 
@@ -48,9 +49,5 @@
         justify-content: end;
         align-items: center;
         width: 50%;
-
-        .checkbox {
-            margin-right: 10px;
-        }
     }
 }

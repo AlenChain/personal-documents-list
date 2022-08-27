@@ -9,16 +9,16 @@ export class DocumentNamePipe implements PipeTransform {
   transform(documentType: string): string {
     switch(documentType) {
       case DocumentType.Passport: {
-        return 'паспорт гражданина РФ';
+        return 'Паспорт гражданина РФ';
       }
       case DocumentType.TransborderPassport: {
-        return 'загран. паспорт гражданина';
+        return 'Загран. паспорт гражданина';
       }
       case DocumentType.BirthCertificate: {
-        return 'свидетельство о рождении';
+        return 'Свидетельство о рождении';
       }
       default: {
-        return 'документ';
+        return 'Документ';
       }
     }
   }
