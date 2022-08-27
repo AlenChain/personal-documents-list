@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DocumentType } from 'src/app/constants/document-types';
+import { PersonalDocumentType } from 'src/app/constants/document-types';
 
 @Pipe({
   name: 'documentName'
@@ -8,13 +8,13 @@ export class DocumentNamePipe implements PipeTransform {
 
   transform(documentType: string): string {
     switch(documentType) {
-      case DocumentType.Passport: {
+      case PersonalDocumentType.Passport: {
         return 'Паспорт гражданина РФ';
       }
-      case DocumentType.TransborderPassport: {
+      case PersonalDocumentType.TransborderPassport: {
         return 'Загран. паспорт гражданина';
       }
-      case DocumentType.BirthCertificate: {
+      case PersonalDocumentType.BirthCertificate: {
         return 'Свидетельство о рождении';
       }
       default: {

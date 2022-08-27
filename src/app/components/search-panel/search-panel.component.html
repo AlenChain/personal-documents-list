@@ -3,7 +3,7 @@
         <mat-form-field class="document-type-control">
             <mat-label>Вид документа</mat-label>
             <mat-select [formControl]="documentType">
-                <mat-option *ngFor="let documentType of documentTypes" [value]="documentType">{{documentType | documentName}}</mat-option>
+                <mat-option *ngFor="let documentType of documentTypes$ | async" [value]="documentType">{{documentType | documentName}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="document-number-control">

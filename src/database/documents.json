@@ -1,0 +1,29 @@
+{   
+    "documents": [
+        {   
+        "isMainDocument": true,
+        "type": "passport",
+        "series": "67 07",
+        "number": "738384",
+        "dateOfIssuance": "03.11.2004"
+        },
+        {   
+        "isMainDocument": false,
+        "type": "transborder_passport",
+        "series": "72",
+        "number": "1947218",
+        "dateOfIssuance": "12.05.2016"
+        },
+        {   
+        "isMainDocument": false,
+        "type": "birth_certificate",
+        "series": "III-AM",
+        "number": "502487",
+        "dateOfIssuance": "20.10.2008"
+        }
+    ],
+    "document-types": [
+        "passport", "transborder_passport", "birth_certificate"
+    ]
+}
+    

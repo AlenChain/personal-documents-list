@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DocumentType } from 'src/app/constants/document-types';
+import { Observable, of } from 'rxjs';
+import { PersonalDocumentType } from 'src/app/constants/document-types';
+import { DocumentsHttpService } from 'src/app/services/documents-http.service';
 
 @Component({
   selector: 'app-search-panel',
@@ -10,16 +12,19 @@ import { DocumentType } from 'src/app/constants/document-types';
 })
 export class SearchPanelComponent implements OnInit {
 
-  documentType: FormControl<DocumentType> = new FormControl();
+  documentType: FormControl<PersonalDocumentType> = new FormControl();
   documentNumber: FormControl<string> = new FormControl();
 
-  mockDocumentTypes: DocumentType[] = [DocumentType.Passport, DocumentType.TransborderPassport, DocumentType.BirthCertificate];
+  documentTypes$: Observable<PersonalDocumentType[]>  = of();
 
-  documentTypes: DocumentType[] = this.mockDocumentTypes;
-
-  constructor() { }
+  constructor(private documentsHttpService: DocumentsHttpService) { }
 
   ngOnInit(): void {
+    this.initDocumentTypes();
+  }
+
+  initDocumentTypes(): void {
+    this.documentTypes$ = this.documentsHttpService.getDocumentTypes();
   }
 
 }
