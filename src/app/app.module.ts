@@ -9,7 +9,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { DocumentsTableComponent } from './components/documents-table/documents-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { DocumentNamePipe } from './pipes/document-name.pipe'  
+import { DocumentNamePipe } from './pipes/document-name.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { DocumentNamePipe } from './pipes/document-name.pipe'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

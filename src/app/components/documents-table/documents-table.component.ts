@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DocumentType } from 'src/app/constants/document-types';
 import { IPersonalDocument } from 'src/app/interfaces/document';
 
 @Component({
   selector: 'app-documents-table',
   templateUrl: './documents-table.component.html',
-  styleUrls: ['./documents-table.component.scss']
+  styleUrls: ['./documents-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentsTableComponent implements OnInit {
 

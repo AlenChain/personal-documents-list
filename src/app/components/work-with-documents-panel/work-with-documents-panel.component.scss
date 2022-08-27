@@ -1,0 +1,56 @@
+.work-with-documents-container {
+    display: flex;
+    flex-direction: row;
+
+    .buttons-container {
+        width: 50%;
+        display: flex;
+
+        .work-with-documents-button {
+            border-radius: 6px;
+            margin-right: 10px;
+            cursor: pointer;
+
+            .button-content {
+                display: flex;
+                text-align: center;
+                justify-content: center;
+
+                .button-label {
+                    height: 30px;
+                    line-height: 30px; 
+                }
+        
+                .button-icon {
+                    padding: calc(15px / 2) 0;
+                    height: 15px;
+                }
+            }
+        }
+
+        .work-with-documents-button.add {
+            background-color: orange;
+        }
+
+        .work-with-documents-button.edit {
+            color: white;
+            background-color: rgb(65, 65, 255);
+        }
+
+        .work-with-documents-button.delete {
+            color: white;
+            background-color: rgb(255, 78, 78);
+        }
+    }
+
+    .checkbox-container {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        width: 50%;
+
+        .checkbox {
+            margin-right: 10px;
+        }
+    }
+}
