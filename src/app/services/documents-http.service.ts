@@ -18,4 +18,8 @@ export class DocumentsHttpService {
   getDocumentTypes(): Observable<PersonalDocumentType[]> {
     return this.http.get<PersonalDocumentType[]>('http://localhost:3000/document-types');
   }
+
+  getOrganizationTypes(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:3000/issuance-organizations');
+  }
 }

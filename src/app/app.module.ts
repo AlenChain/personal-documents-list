@@ -15,7 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { HttpClientModule } from '@angular/common/http';
-import { MatPaginatorModule } from '@angular/material/paginator'; 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { VarDirective } from './directives/var.directive'; 
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     WorkWithDocumentsPanelComponent,
     MainPageComponent,
     DocumentsTableComponent,
-    DocumentNamePipe
+    DocumentNamePipe,
+    VarDirective
   ],
   imports: [
     BrowserModule,

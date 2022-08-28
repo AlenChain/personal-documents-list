@@ -26,6 +26,10 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
     super();
   }
 
+  getRowClasses(row: PersonalDocument): {[key: string]: boolean} {
+    return {archived: row.isArchived, active: row.id === this.documentsHelpService.activeDocumentId}
+  }
+
   ngOnInit(): void {
     this.initDocuments();
     this.watchFiltersChange();
@@ -42,7 +46,10 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
 
     this.documentsHelpService.isArchivedShown$.pipe(
       takeUntil(this.destroy$),
-      tap(() => {
+      tap((isArchivedShown) => {
+        if(!isArchivedShown && this.documents.find((document) => (document.id === this.documentsHelpService.activeDocumentId) && document.isArchived)) {
+          this.documentsHelpService.activeDocumentId = -1;
+        }
         this.setMatTableData(this.documents);
       })
     ).subscribe()
@@ -79,5 +86,9 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
     let matDataSource = new MatTableDataSource(filteredDocuments);
     matDataSource.paginator = this.paginator;
     this.matTableDocuments = matDataSource;
+  }
+
+  selectDocument(documentId: number): void {
+    this.documentsHelpService.activeDocumentId = documentId;
   }
 }

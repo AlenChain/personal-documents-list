@@ -5,8 +5,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
     --font-color-white: rgb(255, 255, 255);
+    --font-color-black: rgb(0, 0, 0);
     --button-background-red: rgb(255, 78, 78);
     --button-background-blue: rgb(65, 65, 255);
     --button-background-orange: rgb(255, 165, 0);
-    --row-background-green: rgb(229, 255, 228);
+    --button-background-red-hover: rgb(255, 133, 133);
+    --button-background-blue-hover: rgb(108, 108, 255);
+    --button-background-orange-hover: rgb(255, 190, 68);
+    --row-background-active: rgb(228, 251, 255);
+    --row-background-archived: rgb(233, 233, 233);
+    --row-background-active-archived: rgb(219, 238, 241);
 }

@@ -34,6 +34,14 @@
             background-color: var(--button-background-red);
         }
 
+        .search:hover:not(:disabled) {
+            background-color: var(--button-background-blue-hover) !important;
+        }
+
+        .clear:hover:not(:disabled) {
+            background-color: var(--button-background-red-hover) !important;
+        }
+
         .disabled {
             cursor: not-allowed;
         }

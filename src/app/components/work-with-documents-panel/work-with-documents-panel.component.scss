@@ -6,6 +6,10 @@
         width: 50%;
         display: flex;
 
+        .work-with-documents-button:disabled {
+            cursor: not-allowed !important;
+        }
+
         .work-with-documents-button {
             border-radius: 6px;
             margin-right: 10px;
@@ -30,6 +34,7 @@
         }
 
         .work-with-documents-button.add {
+            color: var(--font-color-black);
             background-color: var(--button-background-orange);
         }
 
@@ -41,6 +46,18 @@
         .work-with-documents-button.delete {
             color: var(--font-color-white);
             background-color: var(--button-background-red);
+        }
+
+        .work-with-documents-button.add:hover:not(:disabled) {
+            background-color: var(--button-background-orange-hover) !important;
+        }
+
+        .work-with-documents-button.edit:hover:not(:disabled) {
+            background-color: var(--button-background-blue-hover) !important;
+        }
+
+        .work-with-documents-button.delete:hover:not(:disabled) {
+            background-color: var(--button-background-red-hover) !important;
         }
     }
 

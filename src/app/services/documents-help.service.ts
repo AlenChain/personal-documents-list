@@ -7,6 +7,7 @@ import { DocumentFilters } from 'src/app/interfaces/document-filters.interface';
 })
 export class DocumentsHelpService {
 
+  activeDocumentId$: BehaviorSubject<number> = new BehaviorSubject(-1);
   isArchivedShown$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   filters$: BehaviorSubject<DocumentFilters> = new BehaviorSubject({});
 
@@ -14,16 +15,24 @@ export class DocumentsHelpService {
     return this.isArchivedShown$.value;
   }
 
-  set isArchivedShown(isArchived: boolean) {
-    this.isArchivedShown$.next(isArchived);
-  }
-
   get filters(): DocumentFilters {
     return this.filters$.value;
   }
 
+  get activeDocumentId(): number {
+    return this.activeDocumentId$.value;
+  }
+
+  set isArchivedShown(isArchived: boolean) {
+    this.isArchivedShown$.next(isArchived);
+  }
+
   set filters(filtersParams: DocumentFilters) {
     this.filters$.next(filtersParams);
+  }
+
+  set activeDocumentId(activeDocumentId: number) {
+    this.activeDocumentId$.next(activeDocumentId);
   }
 
   constructor() { }

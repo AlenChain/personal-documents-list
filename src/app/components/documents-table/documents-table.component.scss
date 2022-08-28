@@ -18,6 +18,19 @@
     }
 
     .archived {
-        background-color: var(--row-background-green);
+        background-color: var(--row-background-archived);
+    }
+
+    .active {
+        cursor: default !important;
+        background-color: var(--row-background-active);
+    }
+
+    .archived.active {
+        background-color: var(--row-background-active-archived);
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
     }
 }
