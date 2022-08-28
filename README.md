@@ -3,8 +3,8 @@
 ## Инструкции по развертыванию
 
 Проект выполнен на Ангуляр 14.  
-Необходимо с помощью angular cli запустить проект (ng serve).  
-Так же необходимо запустить json server с помощью json-server --watch src/database/documents.json.
+Для развертывания необходимо с помощью angular cli запустить проект (ng serve).  
+Так же необходимо запустить json server (json-server --watch src/database/documents.json).
 
 ## Задание
 
