@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import * as moment from 'moment';
 import { map, tap, Observable, of, takeUntil, switchMap, distinctUntilChanged } from 'rxjs';
 import { UnsubscribeClass } from 'src/app/classes/unsubscibe-class';
 import { PersonalDocument } from 'src/app/interfaces/document';
 import { DocumentFilters } from 'src/app/interfaces/document-filters.interface';
 import { DocumentsHelpService } from 'src/app/services/documents-help.service';
 import { DocumentsHttpService } from 'src/app/services/documents-http.service';
+import { personalDocumentProperty } from 'src/app/types/document-property';
 
 @Component({
   selector: 'app-documents-table',
@@ -22,20 +25,22 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
   matTableDocuments!: MatTableDataSource<PersonalDocument>;
   displayedColumns = ['isMainDocument', 'type', 'series', 'number', 'dateOfIssuance'];
 
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     private documentsHttpService: DocumentsHttpService,
-    private documentsHelpService: DocumentsHelpService
+    private documentsHelpService: DocumentsHelpService,
   ) {
     super();
-  }
-
-  getRowClasses(row: PersonalDocument): {[key: string]: boolean} {
-    return {archived: row.isArchived, active: row.id === this.documentsHelpService.activeDocument?.id}
   }
 
   ngOnInit(): void {
     this.initDocuments();
     this.watchFiltersChange();
+  }
+
+  getRowClasses(row: PersonalDocument): {[key: string]: boolean} {
+    return {archived: row.isArchived, active: row.id === this.documentsHelpService.activeDocument?.id}
   }
 
   initDocuments(): void {
@@ -100,6 +105,19 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
     let matDataSource = new MatTableDataSource(filteredDocuments);
     matDataSource.paginator = this.paginator;
     this.matTableDocuments = matDataSource;
+    this.setMatSorting();
+  }
+
+  setMatSorting(): void {
+    this.matTableDocuments.sortingDataAccessor = (document: PersonalDocument, sortHeaderId: string): string | number => {
+      switch(sortHeaderId) {
+        case 'dateOfIssuance': {
+          return moment(document.dateOfIssuance, 'DD.MM.YYYY').toDate().getTime();
+        };
+        default: return document[sortHeaderId as personalDocumentProperty] ?? '';
+      }
+    }
+    this.matTableDocuments.sort = this.sort;
   }
 
   selectDocument(document: PersonalDocument): void {
