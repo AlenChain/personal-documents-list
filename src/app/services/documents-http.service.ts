@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { PersonalDocument } from 'src/app/interfaces/document';
 import { PersonalDocumentType } from 'src/app/constants/document-types';
 
@@ -12,14 +12,26 @@ export class DocumentsHttpService {
   constructor(private http: HttpClient) { }
 
   getDocuments(): Observable<PersonalDocument[]> {
-    return this.http.get<PersonalDocument[]>('http://localhost:3000/documents');
+    return this.http.get<PersonalDocument[]>('documents');
   }
 
   getDocumentTypes(): Observable<PersonalDocumentType[]> {
-    return this.http.get<PersonalDocumentType[]>('http://localhost:3000/document-types');
+    return this.http.get<PersonalDocumentType[]>('document-types');
   }
 
   getOrganizationTypes(): Observable<string[]> {
-    return this.http.get<string[]>('http://localhost:3000/issuance-organizations');
+    return this.http.get<string[]>('issuance-organizations');
+  }
+
+  deleteDocument(document: PersonalDocument | null): Observable<unknown> {
+    return this.http.delete<unknown>(`documents/${document?.id}`)
+  }
+
+  addDocument() {
+
+  }
+
+  editDocument() {
+    
   }
 }

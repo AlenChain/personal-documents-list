@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, of, takeUntil, tap } from 'rxjs';
 import { UnsubscribeClass } from 'src/app/classes/unsubscibe-class';
+import { AddDocumentModalComponent } from 'src/app/components/add-document-modal/add-document-modal.component';
+import { PersonalDocument } from 'src/app/interfaces/document';
 import { DocumentsHelpService } from 'src/app/services/documents-help.service';
+import { DocumentsHttpService } from 'src/app/services/documents-http.service';
 
 @Component({
   selector: 'app-work-with-documents-panel',
@@ -13,14 +17,18 @@ import { DocumentsHelpService } from 'src/app/services/documents-help.service';
 export class WorkWithDocumentsPanelComponent extends UnsubscribeClass implements OnInit {
 
   archivedControl: FormControl<boolean> = new FormControl(false, {nonNullable: true});
-  selectedDocumentId: number = -1;
-  selectedDocumentId$: Observable<number> = of(-1);
-  disabledClass: {[key: string]: boolean} = {
+  selectedDocument?: PersonalDocument | null;
+  selectedDocument$?: Observable<PersonalDocument | null>;
 
+  constructor(
+    private documentsHelpService: DocumentsHelpService,
+    private dialog: MatDialog, private documentsHttpService: DocumentsHttpService
+  ) {
+    super();
   }
 
-  constructor(private documentsHelpService: DocumentsHelpService) {
-    super();
+  getDisabledStatus(id: number): boolean {
+    return id === undefined || id === null || id === -1;
   }
 
   ngOnInit(): void {
@@ -38,17 +46,37 @@ export class WorkWithDocumentsPanelComponent extends UnsubscribeClass implements
   }
 
   initDocumentSelection(): void {
-    this.selectedDocumentId$ = this.documentsHelpService.activeDocumentId$;
-    this.documentsHelpService.activeDocumentId$.pipe(
+    this.selectedDocument$ = this.documentsHelpService.activeDocument$;
+    this.documentsHelpService.activeDocument$.pipe(
       takeUntil(this.destroy$),
-      tap((id: number) => {
-        this.selectedDocumentId = id;
+      tap((document: PersonalDocument | null) => {
+        this.selectedDocument = document;
       })
     ).subscribe();
   }
 
-  getDisabledClass(): {[key: string]: boolean} {
-    return {disabled: this.selectedDocumentId === -1}
+  addDocument(): void {
+    this.dialog.open(AddDocumentModalComponent, {
+      panelClass: "no-padding",
+      position: { top: '10%' }
+    })
+  }
+
+  editDocument(): void {
+    this.dialog.open(AddDocumentModalComponent, {
+      panelClass: "no-padding",
+      position: { top: '10%' },
+      data: this.selectedDocument
+    })
+  }
+
+  deleteDocument(): void {
+    this.documentsHttpService.deleteDocument(this.documentsHelpService.activeDocument).pipe(
+      takeUntil(this.destroy$),
+      tap(() => {
+        // (add documents array to service) here update db and set active document to null
+      })
+    ).subscribe();
   }
 
 }

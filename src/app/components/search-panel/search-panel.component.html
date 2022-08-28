@@ -12,7 +12,7 @@
         </mat-form-field>
     </form>
     <div class="panel-buttons-container">
-        <button (click)="getFiltersSetStatus() ? applyFilters() : null" class="panel-button search" [disabled]="!getFiltersSetStatus()" [ngClass]="disabledClass">НАЙТИ</button>
-        <button (click)="getFiltersSetStatus() ? clearFilters() : null" class="panel-button clear" [disabled]="!getFiltersSetStatus()" [ngClass]="disabledClass">ОЧИСТИТЬ</button>
+        <button (click)="getFiltersSetStatus() ? applyFilters() : null" class="panel-button search" [disabled]="!getFiltersSetStatus()">НАЙТИ</button>
+        <button (click)="getFiltersSetStatus() ? clearFilters() : null" class="panel-button clear" [disabled]="!getFiltersSetStatus()">ОЧИСТИТЬ</button>
     </div>
 </div>

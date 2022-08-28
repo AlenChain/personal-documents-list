@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { PersonalDocument } from 'src/app/interfaces/document';
 import { DocumentFilters } from 'src/app/interfaces/document-filters.interface';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { DocumentFilters } from 'src/app/interfaces/document-filters.interface';
 })
 export class DocumentsHelpService {
 
-  activeDocumentId$: BehaviorSubject<number> = new BehaviorSubject(-1);
+  activeDocument$: BehaviorSubject<PersonalDocument | null> = new BehaviorSubject<PersonalDocument | null>(null);
   isArchivedShown$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   filters$: BehaviorSubject<DocumentFilters> = new BehaviorSubject({});
 
@@ -19,8 +20,8 @@ export class DocumentsHelpService {
     return this.filters$.value;
   }
 
-  get activeDocumentId(): number {
-    return this.activeDocumentId$.value;
+  get activeDocument(): PersonalDocument | null {
+    return this.activeDocument$.value;
   }
 
   set isArchivedShown(isArchived: boolean) {
@@ -31,8 +32,8 @@ export class DocumentsHelpService {
     this.filters$.next(filtersParams);
   }
 
-  set activeDocumentId(activeDocumentId: number) {
-    this.activeDocumentId$.next(activeDocumentId);
+  set activeDocument(activeDocument: PersonalDocument | null) {
+    this.activeDocument$.next(activeDocument);
   }
 
   constructor() { }

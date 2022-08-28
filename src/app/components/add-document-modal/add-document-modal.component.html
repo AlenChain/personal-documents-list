@@ -1,1 +1,55 @@
-<p>add-document-modal works!</p>
+<div class="modal">
+    <div class="header">
+        <span>Документ</span>
+        <img (click)="closeModal()" class="close-cross" src="assets/close_cross_icon.png">
+    </div>
+    <form class="document-form" [formGroup]="form">
+        <div class="left-form-panel">
+            <div class="checkbox-container main-document">
+                <mat-checkbox formControlName="isMainDocument" color="warn">Основной документ, удостоверяющий личность</mat-checkbox>
+            </div>
+            <div class="type-series-number-controls">
+                <mat-form-field class="type-select">
+                    <mat-label>Вид документа:</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option *ngFor="let documentType of documentTypes$ | async" [value]="documentType">{{documentType | documentName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="series-input">
+                    <mat-label>Серия:</mat-label>
+                    <input matInput formControlName="series">
+                </mat-form-field>
+                <mat-form-field class="number-input">
+                    <mat-label>Номер:</mat-label>
+                    <input matInput formControlName="number">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="organization-select">
+                <mat-label>Организация, выдавшая документ:</mat-label>
+                <mat-select formControlName="organizationType">
+                    <mat-option *ngFor="let organizationType of organizationTypes$ | async" [value]="organizationType">{{organizationType}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="right-form-panel">
+            <div class="checkbox-container archived-document">
+                <mat-checkbox formControlName="isArchived" color="warn">Архивный документ</mat-checkbox>
+            </div>
+            <mat-form-field appearance="fill" class="date-input">
+                <mat-label class="date-label">Дата выдачи:</mat-label>
+                <input formControlName="dateOfIssuance" matInput [matDatepicker]="picker">
+                <mat-hint>ДД.ММ.ГГГГ</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>              
+            <mat-form-field class="code-input">
+                <mat-label>Код подразделения:</mat-label>
+                <input matInput formControlName="code">
+            </mat-form-field>
+        </div>
+    </form>
+    <div class="buttons-container">
+        <button (click)="form.valid ? saveDocument() : null" class="form-button save">СОХРАНИТЬ</button>
+        <button (click)="closeModal()" class="form-button exit">ВЫХОД</button>
+    </div>
+</div>

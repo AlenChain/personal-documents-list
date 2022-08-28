@@ -21,7 +21,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="cursor-pointer" [ngClass]="getRowClasses(row)" (click)="selectDocument(row.id)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="cursor-pointer" [ngClass]="getRowClasses(row)" (click)="selectDocument(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator 
     [pageSize]="10"

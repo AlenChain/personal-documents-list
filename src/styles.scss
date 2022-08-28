@@ -1,18 +1,50 @@
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 
-html, body { height: calc(100% - 15px); }
+html, body { height: 100% }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
     --font-color-white: rgb(255, 255, 255);
     --font-color-black: rgb(0, 0, 0);
+    --font-color-red: rgb(255, 0, 0);
+    --modal-header-background-blue: rgb(64, 64, 255);
+    --button-border-grey: rgb(202, 202, 202);
     --button-background-red: rgb(255, 78, 78);
     --button-background-blue: rgb(65, 65, 255);
     --button-background-orange: rgb(255, 165, 0);
+    --button-background-grey: rgb(245, 245, 245);
     --button-background-red-hover: rgb(255, 133, 133);
     --button-background-blue-hover: rgb(108, 108, 255);
     --button-background-orange-hover: rgb(255, 190, 68);
     --row-background-active: rgb(228, 251, 255);
     --row-background-archived: rgb(233, 233, 233);
     --row-background-active-archived: rgb(219, 238, 241);
+
+    --modal-width: calc(100% - 30px);
+    --modal-padding: 15px;
+}
+
+.no-padding .mat-dialog-container {
+    padding: 0 !important;
+}
+
+.mat-form-field-flex {
+    padding: 0 !important;
+    background-color: white !important;
+}
+
+.date-input .mat-form-field-infix {
+    padding: 0 !important;
+    .mat-form-field-label-wrapper {
+        overflow: visible !important;
+    }
+    .mat-form-field-label:not(.mat-form-field-empty.mat-empty) {
+        top: 8px;
+    }
+}
+
+.date-input.mat-focused {
+    .mat-form-field-label {
+        top: 8px;
+    }
 }

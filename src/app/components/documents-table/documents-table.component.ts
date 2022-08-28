@@ -22,12 +22,15 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
   matTableDocuments!: MatTableDataSource<PersonalDocument>;
   displayedColumns = ['isMainDocument', 'type', 'series', 'number', 'dateOfIssuance'];
 
-  constructor(private documentsHttpService: DocumentsHttpService, private documentsHelpService: DocumentsHelpService) {
+  constructor(
+    private documentsHttpService: DocumentsHttpService,
+    private documentsHelpService: DocumentsHelpService
+  ) {
     super();
   }
 
   getRowClasses(row: PersonalDocument): {[key: string]: boolean} {
-    return {archived: row.isArchived, active: row.id === this.documentsHelpService.activeDocumentId}
+    return {archived: row.isArchived, active: row.id === this.documentsHelpService.activeDocument?.id}
   }
 
   ngOnInit(): void {
@@ -47,12 +50,12 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
     this.documentsHelpService.isArchivedShown$.pipe(
       takeUntil(this.destroy$),
       tap((isArchivedShown) => {
-        if(!isArchivedShown && this.documents.find((document) => (document.id === this.documentsHelpService.activeDocumentId) && document.isArchived)) {
-          this.documentsHelpService.activeDocumentId = -1;
+        if(this.documentsHelpService.activeDocument && !isArchivedShown && this.documents.find((document) => (document.id === this.documentsHelpService.activeDocument?.id) && document.isArchived)) {
+          this.documentsHelpService.activeDocument.id = -1;
         }
         this.setMatTableData(this.documents);
       })
-    ).subscribe()
+    ).subscribe();
   }
 
   watchFiltersChange(): void {
@@ -78,7 +81,7 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
           return type && number;
         })
       })
-    )
+    );
   }
 
   setMatTableData(documents: PersonalDocument[]): void {
@@ -88,7 +91,7 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
     this.matTableDocuments = matDataSource;
   }
 
-  selectDocument(documentId: number): void {
-    this.documentsHelpService.activeDocumentId = documentId;
+  selectDocument(document: PersonalDocument): void {
+    this.documentsHelpService.activeDocument = document;
   }
 }

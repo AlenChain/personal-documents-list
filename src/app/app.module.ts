@@ -14,9 +14,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { VarDirective } from './directives/var.directive'; 
+import { VarDirective } from './directives/var.directive';
+import { MatDialogModule } from '@angular/material/dialog'; 
+import { BaseUrlInterceptor } from 'src/app/interceptors/base-url.interceptor';
+import { MatDatepickerModule } from '@angular/material/datepicker'; 
+import { MatNativeDateModule, } from '@angular/material/core';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -40,9 +46,14 @@ import { VarDirective } from './directives/var.directive';
     MatSelectModule,
     MatCheckboxModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MomentDateModule,
+    MatFormFieldModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

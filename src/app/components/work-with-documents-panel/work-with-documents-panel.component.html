@@ -1,8 +1,8 @@
 <div class="work-with-documents-container">
-    <div class="buttons-container" *ngVar="(selectedDocumentId$ | async) as documentId">
-        <button [disabled]="documentId === -1" [ngClass]="{disabled: documentId === -1}" class="work-with-documents-button add"><div class="button-content"><span class="button-label">ДОБАВИТЬ</span><img class="button-icon" src="assets/plus_icon.png"></div></button>
-        <button [disabled]="documentId === -1" [ngClass]="{disabled: documentId === -1}" class="work-with-documents-button edit"><div class="button-content"><span class="button-label">РЕДАКТИРОВАТЬ</span><img class="button-icon" src="assets/edit_icon.png"></div></button>
-        <button [disabled]="documentId === -1" [ngClass]="{disabled: documentId === -1}" class="work-with-documents-button delete"><div class="button-content"><span class="button-label">УДАЛИТЬ</span><img class="button-icon" src="assets/trash_bin_icon.png"></div></button>
+    <div class="buttons-container" *ngVar="(selectedDocument$ | async)?.id as document">
+        <button (click)="addDocument()" class="work-with-documents-button add"><div class="button-content"><span class="button-label">ДОБАВИТЬ</span><img class="button-icon" src="assets/plus_icon.png"></div></button>
+        <button (click)="editDocument()" [disabled]="getDisabledStatus(document)" class="work-with-documents-button edit"><div class="button-content"><span class="button-label">РЕДАКТИРОВАТЬ</span><img class="button-icon" src="assets/edit_icon.png"></div></button>
+        <button (click)="deleteDocument()" [disabled]="getDisabledStatus(document)" class="work-with-documents-button delete"><div class="button-content"><span class="button-label">УДАЛИТЬ</span><img class="button-icon" src="assets/trash_bin_icon.png"></div></button>
     </div>
     <div class="checkbox-container">
         <mat-checkbox [formControl]="archivedControl" color="warn">Показать архивные</mat-checkbox>

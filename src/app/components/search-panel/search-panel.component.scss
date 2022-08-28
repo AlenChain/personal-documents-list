@@ -25,6 +25,10 @@
             color: var(--font-color-white);
         }
 
+        .panel-button:disabled {
+            cursor: not-allowed;
+        }
+
         .search {
             background-color: var(--button-background-blue);
             margin-right: 10px;
@@ -40,10 +44,6 @@
 
         .clear:hover:not(:disabled) {
             background-color: var(--button-background-red-hover) !important;
-        }
-
-        .disabled {
-            cursor: not-allowed;
         }
     }
 }

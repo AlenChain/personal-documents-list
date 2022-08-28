@@ -19,11 +19,10 @@ export class SearchPanelComponent implements OnInit {
 
   documentTypes$: Observable<PersonalDocumentType[]>  = of();
 
-  constructor(private documentsHttpService: DocumentsHttpService, private documentsHelpService: DocumentsHelpService) { }
-
-  get disabledClass() {
-    return {disabled: !this.getFiltersSetStatus()}
-  }
+  constructor(
+    private documentsHttpService: DocumentsHttpService,
+    private documentsHelpService: DocumentsHelpService
+  ) { }
 
   ngOnInit(): void {
     this.initDocumentTypes();

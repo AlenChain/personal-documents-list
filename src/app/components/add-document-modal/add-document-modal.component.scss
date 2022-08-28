@@ -1,0 +1,104 @@
+.modal {
+    width: 1000px;
+
+    .header {
+        color: white;
+        padding: var(--modal-padding);
+        background-color: var(--modal-header-background-blue);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .close-cross {
+            cursor: pointer;
+            height: 15px;
+        }
+    }
+
+    .document-form {
+        width: var(--modal-width);
+        padding: var(--modal-padding);
+        display: flex;
+
+        .checkbox-container {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container.archived-document {
+            margin-bottom: 15px;
+        }
+
+        .left-form-panel {
+            width: 70%;
+
+            .type-series-number-controls {
+                width: 100%;
+                margin-bottom: 16px;
+
+                .type-select {
+                    width: 45%;
+                    margin-right: 2.5%; 
+                }
+
+                .series-input {
+                    width: 25%;
+                    margin-right: 2.5%; 
+                }
+
+                .number-input {
+                    width: 25%;
+                }
+            }
+
+            .organization-select {
+                width: 100%;
+            }
+        }
+
+        .right-form-panel {
+            width: 27.5%;
+            margin-left: 2.5%;
+
+            .date-label {
+                margin-bottom: 7px;
+            }
+
+            .date-input {
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    .buttons-container {
+        width: var(--modal-width);
+        padding: var(--modal-padding);
+        display: flex;
+        justify-content: space-between;
+
+        .form-button {
+            cursor: pointer;
+            border: 0;
+            border-radius: 3px;
+            width: 120px;
+            height: 30px;
+            color: var(--font-color-white);
+        }
+
+        .form-button.save {
+            background-color: var(--button-background-blue);
+            color: var(--font-color-white)
+        }
+
+        .form-button.exit {
+            width: 90px;
+            border: 1px solid var(--button-border-grey);
+            background-color: var(--button-background-grey);
+            color: var(--font-color-black);
+        }
+    }
+}
+
+.font-red {
+    color: var(--font-color-red)
+}

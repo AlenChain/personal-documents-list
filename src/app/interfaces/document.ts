@@ -7,7 +7,7 @@ export interface PersonalDocument {
     type: PersonalDocumentType,
     series?: string,
     number: string,
-    dateOfIssuance: string,
-    code: string,
-    issuanceOrganization: string
+    dateOfIssuance?: string,
+    code?: string,
+    issuanceOrganization?: string
 }
