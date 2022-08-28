@@ -2,6 +2,7 @@
     "documents": [
         {   
         "isMainDocument": true,
+        "isArchived": false,
         "type": "passport",
         "series": "67 07",
         "number": "738384",
@@ -9,6 +10,7 @@
         },
         {   
         "isMainDocument": false,
+        "isArchived": false,
         "type": "transborder_passport",
         "series": "72",
         "number": "1947218",
@@ -16,6 +18,7 @@
         },
         {   
         "isMainDocument": false,
+        "isArchived": true,
         "type": "birth_certificate",
         "series": "III-AM",
         "number": "502487",

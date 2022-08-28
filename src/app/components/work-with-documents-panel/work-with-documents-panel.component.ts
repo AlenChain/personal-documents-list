@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { takeUntil } from 'rxjs';
+import { takeUntil, tap } from 'rxjs';
 import { UnsubscribeClass } from 'src/app/classes/unsubscibe-class';
+import { DocumentsHelpService } from 'src/app/services/documents-help.service';
 
 @Component({
   selector: 'app-work-with-documents-panel',
@@ -13,7 +14,7 @@ export class WorkWithDocumentsPanelComponent extends UnsubscribeClass implements
 
   showArchivedControl: FormControl<boolean> = new FormControl(false, {nonNullable: true});
 
-  constructor() {
+  constructor(private documentsHelpService: DocumentsHelpService) {
     super();
   }
 
@@ -23,10 +24,11 @@ export class WorkWithDocumentsPanelComponent extends UnsubscribeClass implements
 
   initControl(): void {
     this.showArchivedControl.valueChanges.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe((value) => {
-      // tell service to change table display
-    })
+      takeUntil(this.destroy$),
+      tap((isArchivedShown) => {
+        this.documentsHelpService.isArchivedShown = isArchivedShown;
+      })
+    ).subscribe();
   }
 
 }
