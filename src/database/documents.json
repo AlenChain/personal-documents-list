@@ -4,9 +4,17 @@
         "isMainDocument": true,
         "isArchived": false,
         "type": "passport",
-        "series": "67 07",
+        "series": "40 17",
+        "number": "263467",
+        "dateOfIssuance": "28.10.2020"
+        },
+        {   
+        "isMainDocument": false,
+        "isArchived": true,
+        "type": "passport",
+        "series": "40 13",
         "number": "738384",
-        "dateOfIssuance": "03.11.2004"
+        "dateOfIssuance": "03.11.2014"
         },
         {   
         "isMainDocument": false,
@@ -18,11 +26,11 @@
         },
         {   
         "isMainDocument": false,
-        "isArchived": true,
+        "isArchived": false,
         "type": "birth_certificate",
         "series": "III-AM",
-        "number": "502487",
-        "dateOfIssuance": "20.10.2008"
+        "number": "262487",
+        "dateOfIssuance": "20.10.2000"
         }
     ],
     "document-types": [

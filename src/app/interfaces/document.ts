@@ -1,6 +1,6 @@
 import { PersonalDocumentType } from "src/app/constants/document-types";
 
-export interface IPersonalDocument {
+export interface PersonalDocument {
     isMainDocument: boolean,
     isArchived: boolean,
     type: PersonalDocumentType,

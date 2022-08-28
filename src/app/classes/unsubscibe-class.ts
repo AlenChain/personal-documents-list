@@ -5,7 +5,7 @@ import { of, Subject } from "rxjs";
 export class UnsubscribeClass implements OnDestroy {
     destroy$: Subject<void> = new Subject<void>();
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
     }

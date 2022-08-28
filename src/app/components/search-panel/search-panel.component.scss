@@ -33,5 +33,9 @@
         .clear {
             background-color: var(--button-background-red);
         }
+
+        .disabled {
+            cursor: not-allowed;
+        }
     }
 }
