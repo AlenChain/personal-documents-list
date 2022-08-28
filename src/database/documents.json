@@ -1,46 +1,46 @@
 {
   "documents": [
-    {
-      "id": 0,
-      "isMainDocument": true,
-      "isArchived": false,
-      "type": "passport",
-      "series": "40 17",
-      "number": "263467",
-      "dateOfIssuance": "28.10.2020",
-      "code": "787-273",
-      "issuanceOrganization": "ГУ МВД Адмиралтейского района"
+    {   
+        "id": 3,
+        "isMainDocument": true,
+        "isArchived": false,
+        "type": "passport",
+        "series": "40 17",
+        "number": "263467",
+        "dateOfIssuance": "28.10.2020",
+        "code": "787-273",
+        "issuanceOrganization": "ГУ МВД Адмиралтейского района"
     },
-    {
-      "id": 4,
-      "isMainDocument": false,
-      "isArchived": true,
-      "type": "passport",
-      "series": "40 13",
-      "number": "738384",
-      "dateOfIssuance": "03.11.2014",
-      "code": "787-273",
-      "issuanceOrganization": "ГУ МВД Адмиралтейского района"
+    {   
+        "id": 4,
+        "isMainDocument": false,
+        "isArchived": true,
+        "type": "passport",
+        "series": "40 13",
+        "number": "738384",
+        "dateOfIssuance": "03.11.2014",
+        "code": "787-273",
+        "issuanceOrganization": "ГУ МВД Адмиралтейского района"
     },
-    {
-      "id": 7,
-      "isMainDocument": false,
-      "isArchived": false,
-      "type": "transborder_passport",
-      "series": "72",
-      "number": "1947218",
-      "dateOfIssuance": "12.05.2016",
-      "code": "783-174",
-      "issuanceOrganization": "ГУ МВД Выборгского района"
+    {   
+        "id": 7,
+        "isMainDocument": false,
+        "isArchived": false,
+        "type": "transborder_passport",
+        "series": "72",
+        "number": "1947218",
+        "dateOfIssuance": "12.05.2016",
+        "code": "783-174",
+        "issuanceOrganization": "ГУ МВД Выборгского района"
     },
-    {
-      "id": 10,
-      "isMainDocument": false,
-      "isArchived": false,
-      "type": "birth_certificate",
-      "series": "III-AM",
-      "number": "262487",
-      "dateOfIssuance": "20.10.2000"
+    {   
+        "id": 10,
+        "isMainDocument": false,
+        "isArchived": false,
+        "type": "birth_certificate",
+        "series": "III-AM",
+        "number": "262487",
+        "dateOfIssuance": "20.10.2000"
     }
   ],
   "document-types": [
@@ -52,5 +52,8 @@
     "ГУ МВД Выборгского района",
     "ГУ МВД Адмиралтейского района",
     "ГУ МВД Петроградского района"
-  ]
+  ],
+  "new-id": {
+    "id": 12
+  }
 }

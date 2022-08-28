@@ -49,7 +49,7 @@
         </div>
     </form>
     <div class="buttons-container">
-        <button (click)="form.valid ? saveDocument() : null" class="form-button save">СОХРАНИТЬ</button>
+        <button (click)="form.valid ? saveDocument() : null" class="form-button save" [disabled]="!form.valid">СОХРАНИТЬ</button>
         <button (click)="closeModal()" class="form-button exit">ВЫХОД</button>
     </div>
 </div>

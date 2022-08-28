@@ -85,6 +85,18 @@
             color: var(--font-color-white);
         }
 
+        .form-button:disabled {
+            cursor: not-allowed;
+        }
+
+        .form-button.save:hover:not(:disabled) {
+            background-color: var(--button-background-blue-hover) !important;
+        }
+
+        .form-button.exit:hover:not(:disabled) {
+            background-color: var(--button-background-grey-hover) !important;
+        }
+
         .form-button.save {
             background-color: var(--button-background-blue);
             color: var(--font-color-white)

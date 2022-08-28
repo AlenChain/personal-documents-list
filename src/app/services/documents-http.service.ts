@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, map } from 'rxjs';
 import { PersonalDocument } from 'src/app/interfaces/document';
 import { PersonalDocumentType } from 'src/app/constants/document-types';
 
@@ -27,11 +27,20 @@ export class DocumentsHttpService {
     return this.http.delete<unknown>(`documents/${document?.id}`)
   }
 
-  addDocument() {
-
+  addDocument(document: PersonalDocument): Observable<PersonalDocument> {
+    return this.http.post<PersonalDocument>(`documents`, document);
   }
 
-  editDocument() {
-    
+  editDocument(document: PersonalDocument): Observable<PersonalDocument> {
+    return this.http.patch<PersonalDocument>(`documents/${document?.id}`, document);
+  }
+
+  getNewId(): Observable<number> {
+    return this.http.get<{id: number}>('new-id').pipe(
+      switchMap((response: {id: number}) => {
+        return this.http.post<{id: number}>('new-id', {id: response.id+1});
+      }),
+      map((response: {id: number}) => response.id)
+    )
   }
 }

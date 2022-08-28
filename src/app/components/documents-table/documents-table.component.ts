@@ -39,13 +39,7 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
   }
 
   initDocuments(): void {
-    this.documentsHttpService.getDocuments().pipe(
-      takeUntil(this.destroy$),
-      map((documents) => {
-        this.documents = documents;
-        this.setMatTableData(documents);
-      }),
-    ).subscribe();
+    this.getDocuments().subscribe();
 
     this.documentsHelpService.isArchivedShown$.pipe(
       takeUntil(this.destroy$),
@@ -56,6 +50,23 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
         this.setMatTableData(this.documents);
       })
     ).subscribe();
+
+    this.documentsHelpService.updateDocuments$.pipe(
+      takeUntil(this.destroy$),
+      switchMap(() => {
+        return this.getDocuments();
+      })
+    ).subscribe()
+  }
+
+  getDocuments(): Observable<PersonalDocument[]> {
+    return this.documentsHttpService.getDocuments().pipe(
+      takeUntil(this.destroy$),
+      tap((documents) => {
+        this.documents = documents;
+        this.setMatTableData(documents);
+      }),
+    )
   }
 
   watchFiltersChange(): void {
