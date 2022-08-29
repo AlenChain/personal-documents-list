@@ -83,6 +83,7 @@ export class WorkWithDocumentsPanelComponent extends UnsubscribeClass implements
     this.documentsHttpService.deleteDocument(this.documentsHelpService.activeDocument).pipe(
       takeUntil(this.destroy$),
       tap(() => {
+        this.documentsHelpService.activeDocument = null;
         this.documentsHelpService.updateDocuments = true;
       })
     ).subscribe();

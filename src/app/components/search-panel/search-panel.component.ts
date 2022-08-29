@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of, takeUntil, tap, map } from 'rxjs';
 import { UnsubscribeClass } from 'src/app/classes/unsubscibe-class';
+import { inputProperties } from 'src/app/constants/constants';
 import { PersonalDocumentType } from 'src/app/constants/document-types';
 import { DocumentFilters } from 'src/app/interfaces/document-filters.interface';
 import { DocumentsHelpService } from 'src/app/services/documents-help.service';
@@ -18,6 +19,7 @@ export class SearchPanelComponent extends UnsubscribeClass implements OnInit {
   documentType: FormControl<PersonalDocumentType> = new FormControl();
   documentNumber: FormControl<string> = new FormControl();
   isArchivedShown: boolean = false;
+  maxInputLength: number = inputProperties.maxInputLength;
 
   documentTypes$: Observable<PersonalDocumentType[]>  = of();
 
@@ -48,15 +50,6 @@ export class SearchPanelComponent extends UnsubscribeClass implements OnInit {
         this.isArchivedShown = isArchivedShown;
       })
     ).subscribe();
-  }
-
-  getClearFiltersSetStatus$(): Observable<boolean> {
-    return this.documentsHelpService.isArchivedShown$.pipe(
-      map((isArchivedShown) => {
-        return !!(this.documentNumber.value || this.documentType.value || isArchivedShown)
-      })
-    )
-    
   }
 
   applyFilters(): void {

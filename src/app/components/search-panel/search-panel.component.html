@@ -8,11 +8,11 @@
         </mat-form-field>
         <mat-form-field class="document-number-control">
             <mat-label>Номер</mat-label>
-            <input matInput [formControl]="documentNumber">
+            <input mask="0*" [maxlength]="maxInputLength" matInput [formControl]="documentNumber">
         </mat-form-field>
     </form>
-    <div *ngVar="(getClearFiltersSetStatus$() | async) as clearFiltersSetStatus" class="panel-buttons-container">
+    <div class="panel-buttons-container">
         <button (click)="applyFiltersSetStatus ? applyFilters() : null" class="panel-button search" [disabled]="!applyFiltersSetStatus">НАЙТИ</button>
-        <button (click)="clearFiltersSetStatus ? clearFilters() : null" class="panel-button clear" [disabled]="!clearFiltersSetStatus">ОЧИСТИТЬ</button>
+        <button (click)="clearFilters()" class="panel-button clear">ОЧИСТИТЬ</button>
     </div>
 </div>

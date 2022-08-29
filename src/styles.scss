@@ -1,6 +1,6 @@
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 
-html, body { height: 100% }
+html, body { height: calc(100% - 20px) }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
@@ -17,9 +17,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --button-background-blue-hover: rgb(108, 108, 255);
     --button-background-orange-hover: rgb(255, 190, 68);
     --button-background-grey-hover: rgb(252, 252, 252);
-    --row-background-active: rgb(228, 251, 255);
+    --row-background-active: rgb(225, 225, 255);
     --row-background-archived: rgb(233, 233, 233);
-    --row-background-active-archived: rgb(219, 238, 241);
+    --row-background-active-archived: rgb(204, 204, 231);
 
     --modal-width: calc(100% - 30px);
     --modal-padding: 15px;

@@ -113,7 +113,8 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
     this.matTableDocuments.sortingDataAccessor = (document: PersonalDocument, sortHeaderId: string): string | number => {
       switch(sortHeaderId) {
         case 'dateOfIssuance': {
-          return moment(document.dateOfIssuance, 'DD.MM.YYYY').toDate().getTime();
+          const milliseconds = moment(document.dateOfIssuance, 'DD.MM.YYYY').toDate().getTime();
+          return milliseconds ? milliseconds : new Date().getTime();
         };
         default: return document[sortHeaderId as personalDocumentProperty] ?? '';
       }

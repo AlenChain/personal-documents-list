@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { map, Observable, switchMap, takeUntil, tap, of } from 'rxjs';
 import { UnsubscribeClass } from 'src/app/classes/unsubscibe-class';
-import { properties } from 'src/app/constants/constants';
+import { inputProperties } from 'src/app/constants/constants';
 import { dateFormat } from 'src/app/constants/date-format';
 import { PersonalDocumentType } from 'src/app/constants/document-types';
 import { PersonalDocument } from 'src/app/interfaces/document';
@@ -37,9 +37,9 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
   organizationTypes$?: Observable<string[]>;
   documentTypes$?: Observable<PersonalDocumentType[]>;
   hasMainDocument$?: Observable<boolean>;
-  maxInputLength: number = properties.maxInputLength;
-  minDate: Date = moment([new Date().getFullYear() - 120, 0, 1]).toDate();
-  maxDate: Date = new Date();
+  maxInputLength: number = inputProperties.maxInputLength;
+  minDate: Date = inputProperties.minDate;
+  maxDate: Date = inputProperties.maxDate;
 
   constructor(
     private documentsHttpService: DocumentsHttpService,
@@ -105,7 +105,7 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
       type: <PersonalDocumentType>rawValue.type,
       number: rawValue.number,
     }
-    rawValue.series ? document.series = rawValue.series : null;
+    rawValue.series ? document.series = rawValue.series.trim() : null;
     rawValue.dateOfIssuance ? document.dateOfIssuance = moment(rawValue.dateOfIssuance).format('DD.MM.YYYY') : null;
     rawValue.code ? document.code = rawValue.code : null;
     rawValue.organizationType ? document.issuanceOrganization = rawValue.organizationType : null;
