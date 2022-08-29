@@ -11,8 +11,8 @@
             <input matInput [formControl]="documentNumber">
         </mat-form-field>
     </form>
-    <div class="panel-buttons-container">
-        <button (click)="getFiltersSetStatus() ? applyFilters() : null" class="panel-button search" [disabled]="!getFiltersSetStatus()">НАЙТИ</button>
-        <button (click)="getFiltersSetStatus() ? clearFilters() : null" class="panel-button clear" [disabled]="!getFiltersSetStatus()">ОЧИСТИТЬ</button>
+    <div *ngVar="(getClearFiltersSetStatus$() | async) as clearFiltersSetStatus" class="panel-buttons-container">
+        <button (click)="applyFiltersSetStatus ? applyFilters() : null" class="panel-button search" [disabled]="!applyFiltersSetStatus">НАЙТИ</button>
+        <button (click)="clearFiltersSetStatus ? clearFilters() : null" class="panel-button clear" [disabled]="!clearFiltersSetStatus">ОЧИСТИТЬ</button>
     </div>
 </div>

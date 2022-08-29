@@ -48,7 +48,7 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
 
     this.documentsHelpService.isArchivedShown$.pipe(
       takeUntil(this.destroy$),
-      tap((isArchivedShown) => {
+      tap((isArchivedShown: boolean) => {
         if(this.documentsHelpService.activeDocument && !isArchivedShown && this.documents.find((document) => (document.id === this.documentsHelpService.activeDocument?.id) && document.isArchived)) {
           this.documentsHelpService.activeDocument.id = -1;
         }
@@ -67,7 +67,8 @@ export class DocumentsTableComponent extends UnsubscribeClass implements OnInit 
   getDocuments(): Observable<PersonalDocument[]> {
     return this.documentsHttpService.getDocuments().pipe(
       takeUntil(this.destroy$),
-      tap((documents) => {
+      tap((documents: PersonalDocument[]) => {
+        this.documentsHelpService.hasMainDocument = !!documents.find((document) => document.isMainDocument)
         this.documents = documents;
         this.setMatTableData(documents);
       }),

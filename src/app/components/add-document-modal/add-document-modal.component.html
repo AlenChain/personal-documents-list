@@ -6,7 +6,7 @@
     <form class="document-form" [formGroup]="form">
         <div class="left-form-panel">
             <div class="checkbox-container main-document">
-                <mat-checkbox formControlName="isMainDocument" color="warn">Основной документ, удостоверяющий личность</mat-checkbox>
+                <mat-checkbox [disabled]="!!(hasMainDocument$ | async) && !selectedDocument?.isMainDocument" formControlName="isMainDocument" color="warn">Основной документ, удостоверяющий личность</mat-checkbox>
             </div>
             <div class="type-series-number-controls">
                 <mat-form-field class="type-select">
@@ -17,11 +17,11 @@
                 </mat-form-field>
                 <mat-form-field class="series-input">
                     <mat-label>Серия:</mat-label>
-                    <input matInput formControlName="series">
+                    <input [maxlength]="maxInputLength" matInput formControlName="series">
                 </mat-form-field>
                 <mat-form-field class="number-input">
                     <mat-label>Номер:</mat-label>
-                    <input matInput formControlName="number">
+                    <input [maxlength]="maxInputLength" matInput formControlName="number">
                 </mat-form-field>
             </div>
             <mat-form-field class="organization-select">

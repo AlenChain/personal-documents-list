@@ -12,12 +12,15 @@ export class DocumentsHelpService {
   updateDocuments$: BehaviorSubject<true> = new BehaviorSubject(true);
   activeDocument$: BehaviorSubject<PersonalDocument | null> = new BehaviorSubject<PersonalDocument | null>(null);
   isArchivedShown$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  hasMainDocument$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   filters$: BehaviorSubject<DocumentFilters> = new BehaviorSubject({});
-
-  constructor(private documentsHttpService: DocumentsHttpService) { }
 
   get isArchivedShown(): boolean {
     return this.isArchivedShown$.value;
+  }
+
+  get hasMainDocument(): boolean {
+    return this.hasMainDocument$.value;
   }
 
   get filters(): DocumentFilters {
@@ -34,6 +37,10 @@ export class DocumentsHelpService {
 
   set isArchivedShown(isArchived: boolean) {
     this.isArchivedShown$.next(isArchived);
+  }
+
+  set hasMainDocument(hasMainDocument: boolean) {
+    this.hasMainDocument$.next(hasMainDocument);
   }
 
   set filters(filtersParams: DocumentFilters) {

@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { map, Observable, switchMap, takeUntil, tap, of } from 'rxjs';
 import { UnsubscribeClass } from 'src/app/classes/unsubscibe-class';
+import { properties } from 'src/app/constants/constants';
 import { dateFormat } from 'src/app/constants/date-format';
 import { PersonalDocumentType } from 'src/app/constants/document-types';
 import { PersonalDocument } from 'src/app/interfaces/document';
@@ -25,30 +26,34 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
     isMainDocument: new FormControl(false, {nonNullable: true}),
     organizationType: new FormControl(),
     series: new FormControl(),
-    number: new FormControl('', {nonNullable: true, validators: Validators.required }),
+    number: new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.pattern('[0-9]*')] }),
     type: new FormControl(null, { validators: Validators.required }),
     code: new FormControl(),
     dateOfIssuance: new FormControl(),
     isArchived: new FormControl(false, {nonNullable: true})
   })
+  
   organizationTypeControl: FormControl<string> = new FormControl();
   organizationTypes$?: Observable<string[]>;
   documentTypes$?: Observable<PersonalDocumentType[]>;
+  hasMainDocument$?: Observable<boolean>;
+  maxInputLength: number = properties.maxInputLength;
 
   constructor(
     private documentsHttpService: DocumentsHttpService,
     private dateAdapter: DateAdapter<Date>,
     private dialog: MatDialogRef<AddDocumentModalComponent>,
     private documentsHelpService: DocumentsHelpService,
-    @Inject(MAT_DIALOG_DATA) public selectedDocument: PersonalDocument
+    @Inject(MAT_DIALOG_DATA) public selectedDocument: PersonalDocument | null
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.dateAdapter.setLocale('ru');
+    this.hasMainDocument$ = this.documentsHelpService.hasMainDocument$
     this.initSelectDataOptions();
-    this.initDocumentData();
+    this.initSelectedDocumentData();
   }
 
   initSelectDataOptions(): void {
@@ -56,7 +61,7 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
     this.documentTypes$ = this.documentsHttpService.getDocumentTypes();
   }
 
-  initDocumentData(): void {
+  initSelectedDocumentData(): void {
     if(this.selectedDocument) {
       this.form.patchValue({
         isMainDocument: this.selectedDocument.isMainDocument,
@@ -111,6 +116,7 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
       }),
       tap(() => {
         this.documentsHelpService.updateDocuments = true;
+        this.documentsHelpService.activeDocument = null;
         this.closeModal();
       })
     ).subscribe();

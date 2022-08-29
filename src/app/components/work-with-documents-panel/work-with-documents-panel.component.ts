@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of, takeUntil, tap } from 'rxjs';
+import { distinctUntilChanged, Observable, of, takeUntil, tap } from 'rxjs';
 import { UnsubscribeClass } from 'src/app/classes/unsubscibe-class';
 import { AddDocumentModalComponent } from 'src/app/components/add-document-modal/add-document-modal.component';
 import { PersonalDocument } from 'src/app/interfaces/document';
@@ -39,10 +39,19 @@ export class WorkWithDocumentsPanelComponent extends UnsubscribeClass implements
   initControl(): void {
     this.archivedControl.valueChanges.pipe(
       takeUntil(this.destroy$),
+      distinctUntilChanged(),
       tap((isArchivedShown: boolean) => {
         this.documentsHelpService.isArchivedShown = isArchivedShown;
       })
     ).subscribe();
+
+    this.documentsHelpService.isArchivedShown$.pipe(
+      takeUntil(this.destroy$),
+      distinctUntilChanged(),
+      tap((isArchivedShown: boolean) => {
+        this.archivedControl.patchValue(isArchivedShown);
+      })
+    ).subscribe()
   }
 
   initDocumentSelection(): void {
