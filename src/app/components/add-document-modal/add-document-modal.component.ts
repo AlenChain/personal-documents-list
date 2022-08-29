@@ -32,12 +32,14 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
     dateOfIssuance: new FormControl(),
     isArchived: new FormControl(false, {nonNullable: true})
   })
-  
+
   organizationTypeControl: FormControl<string> = new FormControl();
   organizationTypes$?: Observable<string[]>;
   documentTypes$?: Observable<PersonalDocumentType[]>;
   hasMainDocument$?: Observable<boolean>;
   maxInputLength: number = properties.maxInputLength;
+  minDate: Date = moment([new Date().getFullYear() - 120, 0, 1]).toDate();
+  maxDate: Date = new Date();
 
   constructor(
     private documentsHttpService: DocumentsHttpService,
@@ -51,7 +53,7 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
 
   ngOnInit(): void {
     this.dateAdapter.setLocale('ru');
-    this.hasMainDocument$ = this.documentsHelpService.hasMainDocument$
+    this.hasMainDocument$ = this.documentsHelpService.hasMainDocument$;
     this.initSelectDataOptions();
     this.initSelectedDocumentData();
   }
@@ -69,11 +71,17 @@ export class AddDocumentModalComponent extends UnsubscribeClass implements OnIni
         type: this.selectedDocument.type,
         isArchived: this.selectedDocument.isArchived,
       })
-      this.selectedDocument.issuanceOrganization ? this.form.patchValue({organizationType: this.selectedDocument.issuanceOrganization}) : null;
-      this.selectedDocument.code ? this.form.patchValue({code: this.selectedDocument.code}) : null;
-      this.selectedDocument.dateOfIssuance ? this.form.patchValue({dateOfIssuance: moment(this.selectedDocument.dateOfIssuance, 'DD.MM.YYYY').toDate()}) : null;
-      this.selectedDocument.series ? this.form.patchValue({series: this.selectedDocument.series}) : null;
+      let formControls = this.form.controls;
+      this.selectedDocument.issuanceOrganization ? formControls.organizationType.patchValue(this.selectedDocument.issuanceOrganization) : null;
+      this.selectedDocument.code ? formControls.code.patchValue(this.selectedDocument.code) : null;
+      this.selectedDocument.dateOfIssuance ? formControls.dateOfIssuance.patchValue(moment(this.selectedDocument.dateOfIssuance, 'DD.MM.YYYY').toDate()) : null;
+      this.selectedDocument.series ? formControls.series.patchValue(this.selectedDocument.series) : null;
     }
+  }
+
+  showErrors(): void {
+    this.form.controls.type.markAsTouched();
+    this.form.controls.number.markAsTouched();
   }
 
   getDocumentDTO(): Observable<PersonalDocument> {

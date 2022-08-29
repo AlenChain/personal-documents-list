@@ -24,6 +24,8 @@ import { MatNativeDateModule, } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSortModule } from '@angular/material/sort';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { InputFilterDirective } from 'src/app/directives/date-input.directive';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { MatSortModule } from '@angular/material/sort';
     MainPageComponent,
     DocumentsTableComponent,
     DocumentNamePipe,
-    VarDirective
+    VarDirective,
+    InputFilterDirective
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatNativeDateModule,
     MomentDateModule,
     MatFormFieldModule,
-    MatSortModule
+    MatSortModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
   bootstrap: [AppComponent]

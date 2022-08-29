@@ -21,7 +21,7 @@
                 </mat-form-field>
                 <mat-form-field class="number-input">
                     <mat-label>Номер:</mat-label>
-                    <input [maxlength]="maxInputLength" matInput formControlName="number">
+                    <input mask="0*" [maxlength]="maxInputLength" matInput formControlName="number">
                 </mat-form-field>
             </div>
             <mat-form-field class="organization-select">
@@ -37,19 +37,19 @@
             </div>
             <mat-form-field appearance="fill" class="date-input">
                 <mat-label class="date-label">Дата выдачи:</mat-label>
-                <input formControlName="dateOfIssuance" matInput [matDatepicker]="picker">
+                <input [min]="minDate" [max]="maxDate" dateInputFilter formControlName="dateOfIssuance" matInput [matDatepicker]="picker">
                 <mat-hint>ДД.ММ.ГГГГ</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>              
             <mat-form-field class="code-input">
                 <mat-label>Код подразделения:</mat-label>
-                <input matInput formControlName="code">
+                <input type="text" mask="000-000" matInput formControlName="code">
             </mat-form-field>
         </div>
     </form>
     <div class="buttons-container">
-        <button (click)="form.valid ? saveDocument() : null" class="form-button save" [disabled]="!form.valid">СОХРАНИТЬ</button>
+        <button (click)="form.valid ? saveDocument() : showErrors()" class="form-button save">СОХРАНИТЬ</button>
         <button (click)="closeModal()" class="form-button exit">ВЫХОД</button>
     </div>
 </div>
